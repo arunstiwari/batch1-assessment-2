@@ -238,44 +238,8 @@ with an `@annotation(...)` or `@within(...)` expression.
 
 ---
 
-## 7. Marks
 
-| # | Area | Marks |
-|---|---|---|
-| 1 | REST API design: resources, verbs, status codes, `Location` header, DTOs, validation, one consistent error shape | 25 |
-| 2 | JPA: entity mapping to the given schema, the many-to-one association, repositories, derived query + `@Query`, transaction boundaries, copy counting stays correct | 20 |
-| 3 | Spring Security: in-memory users and roles, `/api/auth/login`, HS256 issue + verify, stateless JWT filter, URL rules, method security, 401 vs 403 | 30 |
-| 4 | AOP: audit aspect with its own annotation and the principal from the security context, timing aspect, correct advice and pointcuts | 15 |
-| 5 | Your own tests: at least four meaningful tests, including one that proves a USER cannot reach an ADMIN endpoint | 10 |
-| | | **100** |
-
-Partial credit is given per endpoint and per rule, so **ship what works**. A compiling
-application with three correct endpoints scores far better than a complete one that does
-not start.
-
----
-
-## 8. Submission
-
-1. `./mvnw clean test` passes.
-2. `./mvnw spring-boot:run` starts on port 8080.
-3. A `NOTES.md` in the project root with:
-   * anything you did not finish, and what you would do next;
-   * one paragraph on where you enforced the "you may only return your own loan" rule,
-     and why it cannot be a URL rule;
-   * any assumption you made.
-4. Zip the project **without** `target/`, or push it to a branch and share the link.
-
-Your evaluator will run `assessment/verify.sh` against your running application and read
-your log output to check the aspects. You can run it yourself while you work:
-
-```bash
-./verify.sh                       # against http://localhost:8080
-```
-
----
-
-## 9. Hints
+## 7. Hints
 
 * Get `POST /api/auth/login` returning a token first, then paste that token into
   `curl -H "Authorization: Bearer ..."`. Everything else depends on it.
