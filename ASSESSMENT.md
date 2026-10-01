@@ -1,6 +1,6 @@
 # Assessment: Library Lending API
 
-**Duration:** 4 hours · **Total marks:** 100 · **Individual work**
+**Duration:** 4 hours 
 
 You are building the backend for a small library. Members browse the catalogue and
 borrow books; librarians maintain the catalogue and can see every loan in the system.
@@ -12,7 +12,7 @@ gets a **JWT**, and sends it on every later request.
 
 ## 1. What you are given
 
-A runnable but empty Spring Boot project in `starter/`:
+A runnable but empty Spring Boot project :
 
 | File | What it does |
 |---|---|
@@ -26,7 +26,7 @@ Check your environment before you start writing code:
 
 ```bash
 cd starter
-./mvnw test          # the smoke test must pass
+
 ./mvnw spring-boot:run
 ```
 
