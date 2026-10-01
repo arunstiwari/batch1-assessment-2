@@ -254,3 +254,44 @@ with an `@annotation(...)` or `@within(...)` expression.
   have a ready-made `409` case to test borrowing against.
 * `spring.jpa.show-sql=true` is already on. Watch the SQL when you write your queries —
   it is the fastest way to catch an N+1 select in `GET /api/loans`.
+
+## 8. Code Snippet for Password Encoder and InMemoryUserDetailsService
+
+```java
+@Bean
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+        return new InMemoryUserDetailsManager(
+                User.withUsername("alice")
+                        .password(passwordEncoder.encode("alice123"))
+                        .roles("USER")
+                        .build(),
+                User.withUsername("bob")
+                        .password(passwordEncoder.encode("bob123"))
+                        .roles("USER")
+                        .build(),
+                User.withUsername("admin")
+                        .password(passwordEncoder.encode("admin123"))
+                        .roles("ADMIN")
+                        .build());
+    }
+```
+
+
+and 
+
+```java
+  @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    /** Exposed so /api/auth/login can verify a username + password the standard way. */
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
+                                                       PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return new ProviderManager(provider);
+    }
+```
+  
